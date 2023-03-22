@@ -165,6 +165,7 @@ pub fn pci_write64(bus: u8, device: u8, function: u8, offset: u8, value: u64) ->
     Ok(())
 }
 
+#[derive(Clone, Debug)]
 pub struct DeviceIter {
     bus: u8,
     device: u8,
