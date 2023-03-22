@@ -70,7 +70,7 @@ unsafe fn iopl(level: c_int) -> Result<(), Error> {
         #[cfg(feature = "std")]
         return Err(nix::errno::from_i32(result))?;
         #[cfg(not(feature = "std"))]
-        return Err(Error);
+        return Err(Error::Errno(result));
     }
 
     Ok(())
