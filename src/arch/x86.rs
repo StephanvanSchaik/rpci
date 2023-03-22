@@ -1,5 +1,6 @@
 use crate::error::Error;
 use core::arch::asm;
+use core::ffi::c_int;
 
 unsafe fn inb(port: u16) -> u8 {
     let mut value;
@@ -62,7 +63,7 @@ unsafe fn outl(port: u16, value: u32) {
 }
 
 #[cfg(target_os = "linux")]
-unsafe fn iopl(level: libc::c_int) -> Result<(), Error> {
+unsafe fn iopl(level: c_int) -> Result<(), Error> {
     let result = unsafe { libc::iopl(level) };
 
     if result != 0 {
@@ -76,7 +77,7 @@ unsafe fn iopl(level: libc::c_int) -> Result<(), Error> {
 }
 
 #[cfg(not(target_os = "linux"))]
-unsafe fn iopl(level: libc::c_int) -> Result<(), Error> {
+unsafe fn iopl(level: c_int) -> Result<(), Error> {
     Ok(())
 }
 
