@@ -262,35 +262,35 @@ impl Device {
         self.read_u16(0x02)
     }
 
-    pub fn read_u8(&self, offset: u8) -> Result<u8, Error> {
-        pci_read8(self.bus, self.device, self.function, offset)
+    pub fn read_u8(&self, offset: usize) -> Result<u8, Error> {
+        pci_read8(self.bus, self.device, self.function, offset.try_into()?)
     }
 
-    pub fn write_u8(&mut self, offset: u8, value: u8) -> Result<(), Error> {
-        pci_write8(self.bus, self.device, self.function, offset, value)
+    pub fn write_u8(&mut self, offset: usize, value: u8) -> Result<(), Error> {
+        pci_write8(self.bus, self.device, self.function, offset.try_into()?, value)
     }
 
-    pub fn read_u16(&self, offset: u8) -> Result<u16, Error> {
-        pci_read16(self.bus, self.device, self.function, offset)
+    pub fn read_u16(&self, offset: usize) -> Result<u16, Error> {
+        pci_read16(self.bus, self.device, self.function, offset.try_into()?)
     }
 
-    pub fn write_u16(&mut self, offset: u8, value: u16) -> Result<(), Error> {
-        pci_write16(self.bus, self.device, self.function, offset, value)
+    pub fn write_u16(&mut self, offset: usize, value: u16) -> Result<(), Error> {
+        pci_write16(self.bus, self.device, self.function, offset.try_into()?, value)
     }
 
-    pub fn read_u32(&self, offset: u8) -> Result<u32, Error> {
-        pci_read32(self.bus, self.device, self.function, offset)
+    pub fn read_u32(&self, offset: usize) -> Result<u32, Error> {
+        pci_read32(self.bus, self.device, self.function, offset.try_into()?)
     }
 
-    pub fn write_u32(&mut self, offset: u8, value: u32) -> Result<(), Error> {
-        pci_write32(self.bus, self.device, self.function, offset, value)
+    pub fn write_u32(&mut self, offset: usize, value: u32) -> Result<(), Error> {
+        pci_write32(self.bus, self.device, self.function, offset.try_into()?, value)
     }
 
-    pub fn read_u64(&self, offset: u8) -> Result<u64, Error> {
-        pci_read64(self.bus, self.device, self.function, offset)
+    pub fn read_u64(&self, offset: usize) -> Result<u64, Error> {
+        pci_read64(self.bus, self.device, self.function, offset.try_into()?)
     }
 
-    pub fn write_u64(&mut self, offset: u8, value: u64) -> Result<(), Error> {
-        pci_write64(self.bus, self.device, self.function, offset, value)
+    pub fn write_u64(&mut self, offset: usize, value: u64) -> Result<(), Error> {
+        pci_write64(self.bus, self.device, self.function, offset.try_into()?, value)
     }
 }

@@ -106,7 +106,7 @@ impl Device {
         Ok(value)
     }
 
-    pub fn read_u8(&self, offset: u8) -> Result<u8, Error> {
+    pub fn read_u8(&self, offset: usize) -> Result<u8, Error> {
         let file = OpenOptions::new().read(true).open(self.path.join("config"))?;
         let mut bytes = [0u8; 1];
         pread(file.as_raw_fd(), &mut bytes, offset as _)?;
@@ -114,7 +114,7 @@ impl Device {
         Ok(bytes[0])
     }
 
-    pub fn write_u8(&self, offset: u8, value: u8) -> Result<(), Error> {
+    pub fn write_u8(&self, offset: usize, value: u8) -> Result<(), Error> {
         let file = OpenOptions::new().write(true).open(self.path.join("config"))?;
         let mut bytes = [value];
         pwrite(file.as_raw_fd(), &mut bytes, offset as _)?;
@@ -122,7 +122,7 @@ impl Device {
         Ok(())
     }
 
-    pub fn read_u16(&self, offset: u8) -> Result<u16, Error> {
+    pub fn read_u16(&self, offset: usize) -> Result<u16, Error> {
         let file = OpenOptions::new().read(true).open(self.path.join("config"))?;
         let mut bytes = [0u8; 2];
         pread(file.as_raw_fd(), &mut bytes, offset as _)?;
@@ -130,7 +130,7 @@ impl Device {
         Ok(u16::from_ne_bytes(bytes))
     }
 
-    pub fn write_u16(&self, offset: u8, value: u16) -> Result<(), Error> {
+    pub fn write_u16(&self, offset: usize, value: u16) -> Result<(), Error> {
         let file = OpenOptions::new().write(true).open(self.path.join("config"))?;
         let mut bytes = u16::to_ne_bytes(value);
         pwrite(file.as_raw_fd(), &mut bytes, offset as _)?;
@@ -138,7 +138,7 @@ impl Device {
         Ok(())
     }
 
-    pub fn read_u32(&self, offset: u8) -> Result<u32, Error> {
+    pub fn read_u32(&self, offset: usize) -> Result<u32, Error> {
         let file = OpenOptions::new().read(true).open(self.path.join("config"))?;
         let mut bytes = [0u8; 4];
         pread(file.as_raw_fd(), &mut bytes, offset as _)?;
@@ -146,7 +146,7 @@ impl Device {
         Ok(u32::from_ne_bytes(bytes))
     }
 
-    pub fn write_u32(&self, offset: u8, value: u32) -> Result<(), Error> {
+    pub fn write_u32(&self, offset: usize, value: u32) -> Result<(), Error> {
         let file = OpenOptions::new().write(true).open(self.path.join("config"))?;
         let mut bytes = u32::to_ne_bytes(value);
         pwrite(file.as_raw_fd(), &mut bytes, offset as _)?;
@@ -154,7 +154,7 @@ impl Device {
         Ok(())
     }
 
-    pub fn read_u64(&self, offset: u8) -> Result<u64, Error> {
+    pub fn read_u64(&self, offset: usize) -> Result<u64, Error> {
         let file = OpenOptions::new().read(true).open(self.path.join("config"))?;
         let mut bytes = [0u8; 8];
         pread(file.as_raw_fd(), &mut bytes, offset as _)?;
@@ -162,7 +162,7 @@ impl Device {
         Ok(u64::from_ne_bytes(bytes))
     }
 
-    pub fn write_u64(&self, offset: u8, value: u64) -> Result<(), Error> {
+    pub fn write_u64(&self, offset: usize, value: u64) -> Result<(), Error> {
         let file = OpenOptions::new().write(true).open(self.path.join("config"))?;
         let mut bytes = u64::to_ne_bytes(value);
         pwrite(file.as_raw_fd(), &mut bytes, offset as _)?;
