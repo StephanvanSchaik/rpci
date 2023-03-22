@@ -5,10 +5,10 @@ edition = "2021"
 
 [features]
 default = ["std"]
-std = []
+std = ["nix", "nom", "thiserror"]
 
 [dependencies]
 libc = "0.2"
-nix = "0.26"
-nom = "7"
-thiserror = "1"
+nix = { version = "0.26", optional = true }
+nom = { version = "7", optional = true }
+thiserror = { version = "1", optional = true }
