@@ -5,6 +5,10 @@ use thiserror::Error;
 #[derive(Debug, Error)]
 pub enum Error {
     #[error(transparent)]
+    ParseInt(#[from] std::num::ParseIntError),
+    #[error(transparent)]
+    Io(#[from] std::io::Error),
+    #[error(transparent)]
     Nix(#[from] nix::Error),
 }
 

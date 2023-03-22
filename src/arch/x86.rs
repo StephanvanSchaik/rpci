@@ -1,5 +1,5 @@
-use core::arch::asm;
 use crate::error::Error;
+use core::arch::asm;
 
 unsafe fn inb(port: u16) -> u8 {
     let mut value;
@@ -232,13 +232,13 @@ impl Device {
         })
     }
 
-    pub fn enumerate() -> DeviceIter {
-        DeviceIter {
+    pub fn enumerate() -> Result<DeviceIter, Error> {
+        Ok(DeviceIter {
             bus: 0,
             device: 0,
             function: 0,
             exhausted: false,
-        }
+        })
     }
 
     pub fn bus(&self) -> u8 {
